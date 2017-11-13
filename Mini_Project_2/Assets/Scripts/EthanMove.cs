@@ -1,13 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EthanMove : MonoBehaviour {
+
+	bool gameRunning;
+
+	// Buttons
+	public Button start;
+	public Button moreInfo;
+	public Button credits;
+	public Button quit;
+
+	// Audio
+	AudioSource audioSource;
+	public AudioClip startMenu;
+	public AudioClip gamePlay;
 
 	Animator anim;
 
 	void Start () {
+		gameRunning = false;
+
 		anim = GetComponent<Animator> ();
+		audioSource = GetComponent<AudioSource> ();
+
+		start.onClick.AddListener(startGame);
 	}
 
 	void Update () {
@@ -39,6 +58,29 @@ public class EthanMove : MonoBehaviour {
 			anim.SetBool ("turningLeft", false);
 			anim.SetBool ("turningRight", false);
 		}
+	}
+
+	void startGame(){
+		gameRunning = true;
+		Destroy (GameObject.Find("StartPanel"));
+
+		// Enable all animators
+		anim.enabled = true;
+
+		GameObject[] iPhones = GameObject.FindGameObjectsWithTag ("iPhone");
+		for (var i = 0; i < iPhones.Length; i++) {
+			(iPhones [i].GetComponent<Animator> ()).enabled = true;
+		}
+
+		GameObject[] macbooks = GameObject.FindGameObjectsWithTag ("mac");
+		for (var i = 0; i < macbooks.Length; i++) {
+			(macbooks [i].GetComponent<Animator> ()).enabled = true;
+		}
+
+		// Change audio clip
+		audioSource.clip = gamePlay;
+		audioSource.Play ();
 
 	}
+
 }
