@@ -58,6 +58,12 @@ public class EthanMove : MonoBehaviour {
 			anim.SetBool ("turningLeft", false);
 			anim.SetBool ("turningRight", false);
 		}
+		if(Input.GetKeyDown(KeyCode.P)){
+			anim.SetBool("PointingLeft", true);
+		}
+		if(Input.GetKeyUp(KeyCode.P)){
+			anim.SetBool("PointingLeft", false);
+		}
 	}
 
 	void startGame(){
