@@ -6,6 +6,8 @@ TagManager:
   tags:
   - iPhone
   - mac
+  - macTable
+  - iphoneTable
   layers:
   - Default
   - TransparentFX
